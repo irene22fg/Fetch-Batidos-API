@@ -17,11 +17,11 @@ DOM.buscar.addEventListener('click', async (event) => {
         .then(checkResponse)
         .then(response => response.json())
         .then(response => {mostrarBatido(response);getIngredientes(response.frutas)})
-        .then(response => {estilos(DOM.encontrado); estilos(DOM.ingredientes);})
         .catch(e => alert(e.message))
 });
 
 function mostrarBatido(batido){
+    estilos(DOM.encontrado)
     DOM.encontrado.appendChild(crearNodo('div', `Batido de ${batido.frutas} con extras de ${batido.extras}`, [], []))
 }
 
@@ -30,6 +30,7 @@ function crearContainers(fruta){
 }
 
 function getIngredientes(response){
+    estilos(DOM.ingredientes)
     response = response.slice(1);
     response = response.slice(0,-1);
     let ingredientesObtenidos = response.split(', ');
