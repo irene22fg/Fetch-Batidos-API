@@ -25,11 +25,16 @@ function mostrarBatido(batido){
     DOM.encontrado.appendChild(crearNodo('div', `Batido de ${batido.frutas} con extras de ${batido.extras}`, [], []))
 }
 
+function crearContainers(fruta){
+    DOM.ingredientes.appendChild(crearNodo('div', '', ['ingrediente', 'buscando'], [{name:'id', value:fruta}]));
+}
+
 function getIngredientes(response){
     response = response.slice(1);
     response = response.slice(0,-1);
     let ingredientesObtenidos = response.split(', ');
     encontrarFrutas(ingredientesObtenidos);
+    ingredientesObtenidos.forEach(element => crearContainers(element));
 }
 
 async function encontrarFrutas(ingredientes){
@@ -39,17 +44,17 @@ async function encontrarFrutas(ingredientes){
             .then(checkResponse)
             .then(response => response.json())
             .then(response => response.find(fruta => fruta.name == ingrediente.trim()))
-            .then(response => mostrarFruta(response.image))
+            .then(response => mostrarFruta(response.image, response.name))
             .catch(e => alert(e.message))
     })
 }
 
-function mostrarFruta(imgURL){
+function mostrarFruta(imgURL, name){
     fetch(imgURL)
         .then(checkResponse)
         .then(response => response.blob())
         .then(createImgFromBlob)
-        .then(addToContentElement)
+        .then(response => addToContentElement(response, name))
         .catch(e => alert(e.message))
 }
 
@@ -59,10 +64,10 @@ const createImgFromBlob = blob => {
     return img;
 }
 
-const addToContentElement = element => {
-    let divContainer = crearNodo('div', "", ['ingrediente'], []);
+function addToContentElement(element, name) {
+    let divContainer = document.getElementById(name)
+    divContainer.classList.toggle('buscando')
     divContainer.appendChild(element)
-    DOM.ingredientes.appendChild(divContainer);
 }
 
 const checkResponse = response => {
