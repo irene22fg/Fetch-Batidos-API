@@ -1,0 +1,27 @@
+article{
+    border: 2px solid;
+    width: 330px;
+    margin-top: 10px;
+}
+.ingrediente{
+    border: 2px solid;
+    width: 140px;
+    height: 140px;
+    margin: 4px;
+}
+img{
+    width: 140px;
+    height: 140px;
+}
+#encontrado{
+    height: 70px;
+}
+#ingredientes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    height: 350px;
+}
+.buscando{
+    background-color: bisque;
+}

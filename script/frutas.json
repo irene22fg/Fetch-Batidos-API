@@ -1,0 +1,47 @@
+[
+    {
+        "code": 1,
+        "name": "Pina",
+        "image": "https://www.calfruitos.com/es/fotos/pr_1474_20191128133348.png"
+    },
+    {
+        "code": 2,
+        "name": "Mango",
+        "image": "https://sicarfarms.com/wp-content/uploads/2021/01/Mango.png"
+    },
+    {
+        "code": 3,
+        "name": "Melón",
+        "image": "https://hortalizasyfrutasnavarrodeharo.com/wp-content/uploads/2018/10/header-melones-navarro-de-haro.png"
+    },
+    {
+        "code": 4,
+        "name": "Sandía",
+        "image": "https://sicarfarms.com/wp-content/uploads/2021/01/Sandia-1.png"
+    },
+    {
+        "code": 5,
+        "name": "Manzana",
+        "image": "https://www.frutality.es/wp-content/uploads/manzana-fuji%C3%A7.png"
+    },
+    {
+        "code": 6,
+        "name": "Naranja",
+        "image": "https://deltablau.com/wp-content/uploads/2017/06/naranja.png"
+    },
+    {
+        "code": 7,
+        "name": "Mandarina",
+        "image": "https://naranjeamos.com/wp-content/uploads/2021/09/naranjeamos-mandarina.webp"
+    },
+    {
+        "code": 8,
+        "name": "pera",
+        "image": "https://www.calfruitos.com/es/fotos/pr_3398_20180807164447.png"
+    },
+    {
+        "code": 9,
+        "name": "Ciruela",
+        "image": "https://deltablau.com/wp-content/uploads/2017/06/ciruela.png"
+    }
+]
