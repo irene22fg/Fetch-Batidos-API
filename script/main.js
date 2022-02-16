@@ -17,23 +17,28 @@ DOM.buscar.addEventListener('click', async (event) => {
         .then(checkResponse)
         .then(response => response.json())
         .then(response => {mostrarBatido(response);getIngredientes(response.frutas)})
-        .catch(e => alert(e.message))
+        .catch(e => alert(`${e.message} - Error al encontrar el batido`))
 });
 
 function mostrarBatido(batido){
     estilos(DOM.encontrado)
-    DOM.encontrado.appendChild(crearNodo('div', `Batido de ${batido.frutas} con extras de ${batido.extras}`, [], []))
+    let ingredientes = arrayIngredientes(batido.frutas)
+    DOM.encontrado.appendChild(crearNodo('p', `Batido de ${ingredientes} con extras de ${batido.extras}.`, [], []))
 }
 
 function crearContainers(fruta){
-    DOM.ingredientes.appendChild(crearNodo('div', '', ['ingrediente', 'buscando'], [{name:'id', value:fruta}]));
+    DOM.ingredientes.appendChild(crearNodo('div', '', ['ingrediente', 'buscando'], [{name:'id', value:fruta.trim()}]));
+}
+
+function arrayIngredientes(response){
+    response = response.slice(1);
+    response = response.slice(0,-1);
+    return response.split(', ');
 }
 
 function getIngredientes(response){
     estilos(DOM.ingredientes)
-    response = response.slice(1);
-    response = response.slice(0,-1);
-    let ingredientesObtenidos = response.split(', ');
+    let ingredientesObtenidos = arrayIngredientes(response);
     encontrarFrutas(ingredientesObtenidos);
     ingredientesObtenidos.forEach(element => crearContainers(element));
 }
@@ -46,7 +51,7 @@ async function encontrarFrutas(ingredientes){
             .then(response => response.json())
             .then(response => response.find(fruta => fruta.name == ingrediente.trim()))
             .then(response => mostrarFruta(response.image, response.name))
-            .catch(e => alert(e.message))
+            .catch(e => alert(`${e.message} - Error al encontrar las frutas`))
     })
 }
 
@@ -56,7 +61,7 @@ function mostrarFruta(imgURL, name){
         .then(response => response.blob())
         .then(createImgFromBlob)
         .then(response => addToContentElement(response, name))
-        .catch(e => alert(e.message))
+        .catch(e => alert(`${e.message} - Error al mostrar la imagen`))
 }
 
 const createImgFromBlob = blob => {
@@ -67,12 +72,12 @@ const createImgFromBlob = blob => {
 
 function addToContentElement(element, name) {
     let divContainer = document.getElementById(name)
-    divContainer.classList.toggle('buscando')
+    estilos(divContainer);
     divContainer.appendChild(element)
 }
 
 const checkResponse = response => {
-    if(!response.ok) throw new Error('Status code not found');
+    if(!response.ok) throw new Error('No encontramos conexión con el servidor');
     return response;
 }
 
